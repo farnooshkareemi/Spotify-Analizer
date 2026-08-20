@@ -1,156 +1,90 @@
-# Spotify-Analizer
-Spotify Audio Feature Clustering
+# Spotify Audio Feature Analyzer
+**Mood, Rhythm, and Texture Analysis Using Unsupervised Learning**
 
-Mood, Rhythm, and Texture Analysis Using Unsupervised Learning
+---
 
-Overview
+## Overview
 
 This project explores the latent structure of music using unsupervised learning techniques applied to Spotify audio features. By analyzing musical attributes such as valence, energy, tempo, and acousticness, the system identifies meaningful patterns related to emotional mood, rhythmic structure, sonic texture, and musical outliers.
 
-Rather than relying on genre labels, this project uses clustering algorithms to uncover natural groupings directly from audio characteristics, enabling deeper insight into music recommendation, playlist generation, and musical structure analysis.
+Rather than relying on genre labels, this project utilizes clustering algorithms to uncover natural groupings directly from audio characteristics. This approach enables deeper insights into music recommendation, playlist generation, and musical structure analysis.
 
-Objectives
+---
 
-This project investigates the following questions:
+## Objectives
 
-Can songs be grouped into emotional mood clusters using audio features alone?
+This project investigates the following core questions:
 
-Do rhythm features form distinct groove patterns and reveal outliers?
+*   Can songs be grouped into emotional mood clusters using audio features alone?
+*   Do rhythm features form distinct groove patterns and reveal outliers?
+*   Can sonic texture distinguish acoustic versus electronic production styles?
+*   How do different clustering algorithms compare in capturing musical structure?
+*   Do certain musical moods correlate with higher popularity?
 
-Can sonic texture distinguish acoustic vs electronic production styles?
+---
 
-How do different clustering algorithms compare in capturing musical structure?
+## Dataset
 
-Do certain musical moods correlate with higher popularity?
+The dataset consists of Spotify tracks with audio features extracted directly from the Spotify API. 
 
-Dataset
+### Key Features Analyzed
 
-The dataset consists of Spotify tracks with audio features extracted from the Spotify API.
+| Category | Features |
+| :--- | :--- |
+| **Emotional** | Valence (positivity), Energy (intensity), Danceability (rhythmic suitability) |
+| **Rhythm** | Tempo (BPM), Energy, Danceability |
+| **Texture** | Acousticness, Instrumentalness, Loudness |
+| **Metadata** | Popularity score, Track duration, Genre *(used exclusively for interpretation, not clustering)* |
 
-Key Features Used
+---
 
-Emotional features:
+## Methodology
 
-Valence (positivity)
+Multiple clustering approaches were applied to capture different facets of musical structure:
 
-Energy (intensity)
+### 1. Hierarchical Clustering
+*   **Purpose:** Identifying emotional mood clusters.
+*   **Key Findings:** Grouped tracks into four primary states: Calm/Positive, Sad/Low Energy, Happy/Energetic, and Angry/High Energy.
 
-Danceability (rhythmic suitability)
+### 2. Gaussian Mixture Models (GMM)
+*   **Purpose:** Probabilistic clustering to identify hybrid emotional tracks.
+*   **Key Findings:** Enabled soft cluster assignments, successfully capturing overlapping and complex emotional states.
 
-Rhythm features:
+### 3. DBSCAN (Density-Based Clustering)
+*   **Purpose:** Rhythm analysis and outlier detection.
+*   **Key Findings:** Identified dense groove regions and flagged experimental, unconventional tracks as outliers.
 
-Tempo (BPM)
+### 4. K-Means Clustering
+*   **Purpose:** Sonic texture analysis.
+*   **Key Findings:** Categorized tracks into distinct texture environments, including Electronic/Processed, Acoustic/Organic, Hybrid Vocal-Oriented, and Hybrid Instrumental/Ambient.
 
-Energy
+### 5. Spectral Clustering
+*   **Purpose:** Capturing non-linear emotional structures.
+*   **Key Findings:** Revealed curved emotional boundaries and continuous emotional transitions between tracks.
 
-Danceability
+### 6. HDBSCAN Outlier Detection
+*   **Purpose:** Identifying rare and extreme musical structures.
+*   **Key Findings:** Detected strict outliers, including highly experimental tracks, spoken-word content, instrumental extremes, and non-mainstream music.
 
-Texture features:
+---
 
-Acousticness
+## Project Structure
 
-Instrumentalness
-
-Loudness
-
-Additional metadata:
-
-Popularity score
-
-Track duration
-
-Genre (used only for interpretation, not clustering)
-
-Methods Used
-
-Multiple clustering approaches were applied to capture different aspects of musical structure:
-
-1. Hierarchical Clustering
-
-Used to identify emotional mood clusters.
-
-Findings:
-
-Calm / Positive
-
-Sad / Low Energy
-
-Happy / Energetic
-
-Angry / High Energy
-
-2. Gaussian Mixture Models (GMM)
-
-Provides probabilistic clustering and identifies hybrid emotional tracks.
-
-Advantages:
-
-Soft cluster assignments
-
-Captures overlapping emotional states
-
-3. DBSCAN (Density-Based Clustering)
-
-Used for rhythm analysis and outlier detection.
-
-Findings:
-
-Dense groove regions identified
-
-Experimental and unconventional tracks detected as outliers
-
-4. K-Means Clustering
-
-Used for sonic texture analysis.
-
-Identified texture environments:
-
-Electronic / Processed
-
-Acoustic / Organic
-
-Hybrid Vocal-Oriented
-
-Hybrid Instrumental / Ambient
-
-5. Spectral Clustering
-
-Captures non-linear emotional structure.
-
-Reveals:
-
-Curved emotional boundaries
-
-Continuous emotional transitions
-
-6. HDBSCAN Outlier Detection
-
-Identifies rare and extreme musical structures.
-
-Outliers include:
-
-Experimental tracks
-
-Spoken-word content
-
-Instrumental extremes
-
-Non-mainstream music
+```text
 spotify-clustering/
 │
 ├── data/
 │   └── spotify_tracks.csv
 │
-├── preprocessing.py
 ├── clustering/
-│   ├── hierarchical.py
-│   ├── gmm.py
 │   ├── dbscan.py
+│   ├── gmm.py
+│   ├── hierarchical.py
 │   ├── kmeans.py
 │   └── spectral.py
 │
-├── visualization.py
-├── outlier_detection.py
 ├── main.py
-│
+├── outlier_detection.py
+├── preprocessing.py
+├── visualization.py
 └── README.md
